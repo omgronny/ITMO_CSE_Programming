@@ -1,12 +1,11 @@
 package heroes;
 
-import Food.Foods;
+import animals.DecentDog;
+import food.Foods;
 import locations.*;
 
-public class Dunno implements Human {
+public class Dunno extends Hero implements Forgettable {
 
-    private String name;
-    private int age;
     private int iq;
     private int money;
     private int foodCount;
@@ -17,24 +16,6 @@ public class Dunno implements Human {
 
     public void setFoodCount(int foodCount) {
         this.foodCount = foodCount;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public int getIq() {
@@ -54,12 +35,13 @@ public class Dunno implements Human {
     public Dunno() { }
 
     public Dunno(String name, int age, int money) {
-        this.name = name;
-        this.age = age;
+        super(name,age);
         this.iq = 0;
         this.money = money;
         this.foodCount = 5;
     }
+
+
 
     @Override
     public String toString() {
@@ -68,22 +50,18 @@ public class Dunno implements Human {
 
     @Override
     public int hashCode() {
-        return this.name.length() + this.age + this.money + this.foodCount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return ((Human) o).getName().equals(this.name);
+        return this.getName().length() + this.getAge() + this.money + this.foodCount;
     }
 
 
     @Override
-    public boolean isFriend(Human human) {
+    public boolean isFriend(Hero human) {
         Goat g = new Goat();
-        return human.getClass() == g.getClass();
+        return human.equals(g);
     }
 
-    public boolean forgetting(Human human) {
+    @Override
+    public boolean forgetting(Hero human) {
         return !(isFriend(human));
     }
 
@@ -123,7 +101,10 @@ public class Dunno implements Human {
     public void lunch() {
 
         if (Math.random() > 0.5) {
-            System.out.println("i'm eating with dogs");
+            System.out.println(this.getName() + ": i'm eating with dogs");
+            DecentDog decentDog = new DecentDog("Decent Dog");
+            System.out.print(decentDog.getName() + ": ");
+            decentDog.lunch();
             this.foodCount++;
         } else {
             System.out.println("i'm eating alone");
@@ -136,12 +117,12 @@ public class Dunno implements Human {
     public void locationis() {
 
         RichHome rh = new RichHome();
-        System.out.println("i'm live in");
+        System.out.println(this.getName() + ": i'm live in");
         rh.thisLocationIs();
 
     }
 
-    public void visit(Human human) {
+    public void visit(Hero human) {
         if (this.isFriend(human)) {
             System.out.println("i'm visiting " + human.getName());
         }

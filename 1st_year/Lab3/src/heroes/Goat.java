@@ -2,22 +2,12 @@ package heroes;
 
 import locations.NighHome;
 
-public class Goat implements Human {
+import java.util.Objects;
 
-    private String name;
-    private int age;
+public class Goat extends Hero {
+
     private boolean isSick;
     private int foodCount;
-
-    @Override
-    public String getName() { return name; }
-
-    @Override
-    public void setName(String name) { this.name = name; }
-
-    public int getAge() { return age; }
-
-    public void setAge(int age) { this.age = age; }
 
     public boolean isSick() { return isSick; }
 
@@ -28,17 +18,15 @@ public class Goat implements Human {
     public void setFoodCount(int foodCount) { this.foodCount = foodCount; }
 
     public Goat(String name, int age) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
         this.isSick = Math.random() > 0.5;
         this.foodCount = 0;
     }
 
     public Goat() { }
 
-
     @Override
-    public boolean isFriend(Human human) {
+    public boolean isFriend(Hero human) {
         Dunno dun = new Dunno();
         return human.getClass() == dun.getClass();
     }

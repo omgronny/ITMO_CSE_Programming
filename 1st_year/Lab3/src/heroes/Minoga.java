@@ -2,35 +2,21 @@ package heroes;
 
 import locations.RichHome;
 
-public class Minoga implements Human {
+public class Minoga extends Hero {
 
-    private String name;
-    private int age;
     private int money;
-
-    @Override
-    public String getName() { return name; }
-
-    @Override
-    public void setName(String name) { this.name = name; }
-
-    public int getAge() { return age; }
-
-    public void setAge(int age) { this.age = age; }
 
     public int getMoney() { return money; }
 
     public void setMoney(int money) { this.money = money; }
 
-
     public Minoga(String name, int age, int money) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
         this.money = money;
     }
 
     @Override
-    public boolean isFriend(Human human) { return false; }
+    public boolean isFriend(Hero human) { return false; }
 
     @Override
     public void locationis() {
@@ -41,10 +27,11 @@ public class Minoga implements Human {
 
     public void getMoneyToDunno(Dunno d, int x) {
         if (money > x) {
+            System.out.println(this.getName() + ": Well, okay");
             money -= x;
             d.setMoney(d.getMoney() + x);
         } else {
-            System.out.println("i have no money");
+            System.out.println(this.getName() + ": No! you shouldn't walk with some goat");
         }
 
     }

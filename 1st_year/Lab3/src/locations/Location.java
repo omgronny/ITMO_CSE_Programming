@@ -1,7 +1,7 @@
 package locations;
 
-public interface Location {
+public abstract class Location {
 
-    void thisLocationIs();
+    public abstract void thisLocationIs();
 
 }

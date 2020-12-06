@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>animals.DecentDog</OriginalElement>
+  <nodes>
+    <node x="638.9729483282676" y="842.0">locations.RichHome</node>
+    <node x="1096.2688196555218" y="842.0">animals.Dinnable</node>
+    <node x="609.4188196555218" y="1353.0">heroes.Dunno</node>
+    <node x="90.92084599797363" y="1132.0">heroes.Forgettable</node>
+    <node x="1218.3354863221884" y="550.0">food.Foods</node>
+    <node x="1042.0333333333333" y="12.0">java.io.Serializable</node>
+    <node x="188.04997467071962" y="282.0">java.lang.FunctionalInterface</node>
+    <node x="420.99999999999994" y="1574.0">locations.NighHome</node>
+    <node x="676.0333333333333" y="0.0">java.lang.constant.Constable</node>
+    <node x="991.4666413373862" y="104.0">java.lang.Enum</node>
+    <node x="745.8300911854105" y="1098.5">animals.DecentDog</node>
+    <node x="52.35631965552193" y="594.5">heroes.Friendable</node>
+    <node x="930.3104863221884" y="550.0">animals.DogTypes</node>
+    <node x="1089.602152988855" y="1120.5">animals.StandartDog</node>
+    <node x="1206.0333333333333" y="0.0">java.lang.Comparable</node>
+    <node x="294.9208459979737" y="1065.0">heroes.Minoga</node>
+    <node x="85.75450861195577" y="753.0">heroes.Hero</node>
+    <node x="475.1688196555218" y="1919.0">heroes.Goat</node>
+    <node x="486.1688196555218" y="2233.0">Main</node>
+    <node x="925.6571175278624" y="1109.5">animals.BadDog</node>
+    <node x="672.5354863221885" y="594.5">locations.Location</node>
+    <node x="897.2688196555217" y="753.0">animals.Dogs</node>
+    <node x="502.1749999999999" y="594.5">locations.Locatable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="animals.StandartDog" target="animals.Dogs">
+      <point x="-20.0" y="-38.5" />
+      <point x="1149.602152988855" y="1015.0" />
+      <point x="1061.3521529888549" y="1015.0" />
+      <point x="74.58333333333326" y="116.0" />
+    </edge>
+    <edge source="animals.DecentDog" target="locations.RichHome">
+      <point x="-65.14285714285711" y="-60.5" />
+      <point x="39.0" y="27.0" />
+    </edge>
+    <edge source="heroes.Dunno" target="heroes.Goat">
+      <point x="-16.416666666666742" y="248.0" />
+      <point x="691.5021529888551" y="1889.0" />
+      <point x="614.9188196555218" y="1889.0" />
+      <point x="53.75" y="-127.0" />
+    </edge>
+    <edge source="animals.StandartDog" target="animals.Dinnable">
+      <point x="20.0" y="-38.5" />
+      <point x="37.33333333333337" y="27.0" />
+    </edge>
+    <edge source="locations.RichHome" target="locations.Location">
+      <point x="0.0" y="-27.0" />
+      <point x="716.9729483282676" y="733.0" />
+      <point x="789.5354863221885" y="733.0" />
+      <point x="39.0" y="27.0" />
+    </edge>
+    <edge source="heroes.Minoga" target="heroes.Hero">
+      <point x="-30.125" y="-94.0" />
+      <point x="385.2958459979737" y="1025.0" />
+      <point x="247.3259371833842" y="1025.0" />
+      <point x="74.57142857142844" y="116.0" />
+    </edge>
+    <edge source="heroes.Dunno" target="food.Foods">
+      <point x="88.6500000000001" y="-248.0" />
+      <point x="796.5688196555219" y="1333.0" />
+      <point x="1298.8354863221884" y="1333.0" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="heroes.Friendable" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-27.0" />
+      <point x="138.35631965552193" y="530.0" />
+      <point x="221.38330800405288" y="530.0" />
+      <point x="-66.66666666666674" y="15.0" />
+    </edge>
+    <edge source="heroes.Forgettable" target="java.lang.FunctionalInterface">
+      <point x="46.0" y="-27.0" />
+      <point x="228.92084599797363" y="1045.0" />
+      <point x="300.46879432624144" y="1045.0" />
+      <point x="300.46879432624144" y="530.0" />
+      <point x="288.0499746707196" y="530.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="heroes.Goat" target="heroes.Dunno">
+      <point x="10.75" y="-127.0" />
+      <point x="571.9188196555218" y="1869.0" />
+      <point x="625.8354863221886" y="1869.0" />
+      <point x="-82.08333333333326" y="248.0" />
+    </edge>
+    <edge source="animals.BadDog" target="animals.Dinnable">
+      <point x="51.0" y="-49.5" />
+      <point x="1044.6571175278623" y="1045.0" />
+      <point x="1152.2688196555218" y="1045.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="heroes.Minoga" target="locations.RichHome">
+      <point x="30.125" y="-94.0" />
+      <point x="445.5458459979737" y="1035.0" />
+      <point x="651.9729483282676" y="1035.0" />
+      <point x="-65.0" y="27.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.io.Serializable">
+      <point x="0.0" y="-193.0" />
+      <point x="1140.9666413373861" y="79.0" />
+      <point x="1114.0333333333333" y="79.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="heroes.Forgettable" target="heroes.Hero">
+      <point x="-46.0" y="-27.0" />
+      <point x="136.92084599797363" y="1045.0" />
+      <point x="197.61165146909866" y="1045.0" />
+      <point x="24.85714285714289" y="116.0" />
+    </edge>
+    <edge source="animals.BadDog" target="animals.Dogs">
+      <point x="17.0" y="-49.5" />
+      <point x="1010.6571175278624" y="1025.0" />
+      <point x="1001.6854863221884" y="1025.0" />
+      <point x="14.916666666666629" y="116.0" />
+    </edge>
+    <edge source="animals.Dogs" target="animals.DogTypes">
+      <point x="-44.75" y="-116.0" />
+      <point x="942.0188196555217" y="733.0" />
+      <point x="1021.8104863221884" y="733.0" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="animals.DecentDog" target="locations.Locatable">
+      <point x="-21.714285714285666" y="-60.5" />
+      <point x="800.1158054711249" y="1045.0" />
+      <point x="805.4729483282676" y="1045.0" />
+      <point x="805.4729483282676" y="723.0" />
+      <point x="604.175" y="723.0" />
+      <point x="34.0" y="27.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Enum">
+      <point x="-99.66666666666669" y="193.0" />
+      <point x="1041.2999746707196" y="510.0" />
+      <point x="971.4666413373862" y="510.0" />
+      <point x="971.4666413373862" y="297.0" />
+      <point x="-149.5" y="-0.0" />
+    </edge>
+    <edge source="heroes.Goat" target="heroes.Hero">
+      <point x="-75.25" y="-127.0" />
+      <point x="485.9188196555218" y="1899.0" />
+      <point x="0.0" y="1899.0" />
+      <point x="0.0" y="1005.0" />
+      <point x="98.1830800405271" y="1005.0" />
+      <point x="-74.57142857142867" y="116.0" />
+    </edge>
+    <edge source="heroes.Dunno" target="heroes.Minoga">
+      <point x="-29.549999999999955" y="-248.0" />
+      <point x="678.3688196555219" y="1283.0" />
+      <point x="445.5458459979737" y="1283.0" />
+      <point x="30.125" y="94.0" />
+    </edge>
+    <edge source="heroes.Friendable" target="heroes.Hero">
+      <point x="43.0" y="27.0" />
+      <point x="181.35631965552193" y="733.0" />
+      <point x="172.75450861195577" y="733.0" />
+      <point x="0.0" y="-116.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.constant.Constable">
+      <point x="-99.66666666666669" y="-193.0" />
+      <point x="1041.2999746707196" y="79.0" />
+      <point x="849.0333333333333" y="79.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="heroes.Dunno" target="heroes.Forgettable">
+      <point x="-49.25" y="-248.0" />
+      <point x="658.6688196555218" y="1293.0" />
+      <point x="182.92084599797363" y="1293.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="animals.DecentDog" target="animals.DogTypes">
+      <point x="0.0" y="-60.5" />
+      <point x="821.8300911854105" y="1045.0" />
+      <point x="816.4729483282676" y="1045.0" />
+      <point x="816.4729483282676" y="713.0" />
+      <point x="948.6104863221884" y="713.0" />
+      <point x="-73.19999999999999" y="71.5" />
+    </edge>
+    <edge source="heroes.Dunno" target="heroes.Hero">
+      <point x="-68.94999999999982" y="-248.0" />
+      <point x="638.968819655522" y="1303.0" />
+      <point x="80.42084599797363" y="1303.0" />
+      <point x="80.42084599797363" y="1035.0" />
+      <point x="172.75450861195577" y="1035.0" />
+      <point x="0.0" y="116.0" />
+    </edge>
+    <edge source="animals.DogTypes" target="java.lang.Enum">
+      <point x="0.0" y="-71.5" />
+      <point x="1021.8104863221884" y="530.0" />
+      <point x="1140.9666413373861" y="530.0" />
+      <point x="0.0" y="193.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Comparable">
+      <point x="99.66666666666669" y="-193.0" />
+      <point x="1240.6333080040529" y="79.0" />
+      <point x="1277.0333333333333" y="79.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="heroes.Hero" target="heroes.Friendable">
+      <point x="-58.0" y="-116.0" />
+      <point x="114.75450861195577" y="733.0" />
+      <point x="95.35631965552193" y="733.0" />
+      <point x="-43.0" y="27.0" />
+    </edge>
+    <edge source="animals.BadDog" target="animals.DogTypes">
+      <point x="-51.0" y="-49.5" />
+      <point x="942.6571175278624" y="1005.0" />
+      <point x="861.3104863221884" y="1005.0" />
+      <point x="861.3104863221884" y="723.0" />
+      <point x="985.2104863221884" y="723.0" />
+      <point x="-36.60000000000002" y="71.5" />
+    </edge>
+    <edge source="food.Foods" target="java.lang.Enum">
+      <point x="0.0" y="-71.5" />
+      <point x="1298.8354863221884" y="530.0" />
+      <point x="1240.6333080040529" y="530.0" />
+      <point x="99.66666666666669" y="193.0" />
+    </edge>
+    <edge source="heroes.Dunno" target="locations.RichHome">
+      <point x="9.849999999999909" y="-248.0" />
+      <point x="717.7688196555217" y="1333.0" />
+      <point x="711.4729483282676" y="1333.0" />
+      <point x="711.4729483282676" y="1045.0" />
+      <point x="703.9729483282676" y="1045.0" />
+      <point x="-13.0" y="27.0" />
+    </edge>
+    <edge source="Main" target="heroes.Goat">
+      <point x="-12.5" y="-27.0" />
+      <point x="548.6688196555218" y="2193.0" />
+      <point x="518.1688196555218" y="2193.0" />
+      <point x="-43.0" y="127.0" />
+    </edge>
+    <edge source="heroes.Hero" target="locations.Locatable">
+      <point x="58.0" y="-116.0" />
+      <point x="230.75450861195577" y="733.0" />
+      <point x="536.175" y="733.0" />
+      <point x="-34.0" y="27.0" />
+    </edge>
+    <edge source="heroes.Minoga" target="heroes.Dunno">
+      <point x="90.375" y="94.0" />
+      <point x="505.7958459979737" y="1273.0" />
+      <point x="698.0688196555219" y="1273.0" />
+      <point x="-9.849999999999909" y="-248.0" />
+    </edge>
+    <edge source="locations.Locatable" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-27.0" />
+      <point x="570.175" y="530.0" />
+      <point x="354.71664133738636" y="530.0" />
+      <point x="66.66666666666674" y="15.0" />
+    </edge>
+    <edge source="animals.StandartDog" target="animals.DogTypes">
+      <point x="60.0" y="-38.5" />
+      <point x="1229.602152988855" y="1045.0" />
+      <point x="1223.554179331307" y="1045.0" />
+      <point x="1223.554179331307" y="733.0" />
+      <point x="1095.0104863221884" y="733.0" />
+      <point x="73.19999999999993" y="71.5" />
+    </edge>
+    <edge source="animals.DecentDog" target="animals.Dinnable">
+      <point x="65.14285714285711" y="-60.5" />
+      <point x="886.9729483282676" y="1035.0" />
+      <point x="1114.9354863221884" y="1035.0" />
+      <point x="-37.33333333333334" y="27.0" />
+    </edge>
+    <edge source="heroes.Goat" target="locations.NighHome">
+      <point x="-32.25" y="-127.0" />
+      <point x="528.9188196555218" y="1879.0" />
+      <point x="459.99999999999994" y="1879.0" />
+      <point x="-39.0" y="27.0" />
+    </edge>
+    <edge source="Main" target="heroes.Minoga">
+      <point x="-37.5" y="-27.0" />
+      <point x="523.6688196555218" y="2203.0" />
+      <point x="325.6688196555218" y="2203.0" />
+      <point x="325.6688196555218" y="1333.0" />
+      <point x="385.2958459979737" y="1333.0" />
+      <point x="-30.125" y="94.0" />
+    </edge>
+    <edge source="Main" target="heroes.Dunno">
+      <point x="62.5" y="-27.0" />
+      <point x="623.6688196555218" y="2213.0" />
+      <point x="779.0854863221884" y="2213.0" />
+      <point x="779.0854863221884" y="1899.0" />
+      <point x="790.0021529888551" y="1899.0" />
+      <point x="82.08333333333327" y="248.0" />
+    </edge>
+    <edge source="heroes.Dunno" target="animals.DecentDog">
+      <point x="49.25" y="-248.0" />
+      <point x="757.1688196555218" y="1313.0" />
+      <point x="783.8300911854105" y="1313.0" />
+      <point x="-38.0" y="60.5" />
+    </edge>
+    <edge source="animals.DecentDog" target="animals.Dogs">
+      <point x="43.428571428571445" y="-60.5" />
+      <point x="865.258662613982" y="1025.0" />
+      <point x="942.0188196555217" y="1025.0" />
+      <point x="-44.75" y="116.0" />
+    </edge>
+    <edge source="locations.NighHome" target="locations.Location">
+      <point x="0.0" y="-27.0" />
+      <point x="498.99999999999994" y="1333.0" />
+      <point x="546.4208459979736" y="1333.0" />
+      <point x="546.4208459979736" y="733.0" />
+      <point x="711.5354863221885" y="733.0" />
+      <point x="-39.0" y="27.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="827.5" y="906.5" />
+  <SelectedNodes>
+    <node>java.io.Serializable</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

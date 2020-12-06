@@ -1,21 +1,14 @@
 package animals;
 
-public class StandartDog extends Dogs{
-
-    private String name;
-    private DogTypes type;
+public class StandartDog extends Dogs implements Dinnable{
 
     StandartDog(String name) {
-        super(DogTypes.STANDART);
-        this.name = name;
+        super(DogTypes.STANDART, name);
     }
 
     public void lunch() {
         System.out.println("i eat in the street");
     }
 
-    public DogTypes getType() {
-        return type;
-    }
 
 }

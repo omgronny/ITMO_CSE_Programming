@@ -1,21 +1,25 @@
 package animals;
 
-public class DecentDog extends Dogs{
+import locations.Locatable;
+import locations.RichHome;
 
-    private String name;
-    private DogTypes type;
+public class DecentDog extends Dogs implements Dinnable, Locatable {
 
-    DecentDog(String name) {
-        super(DogTypes.DECENT);
-        this.name = name;
+
+    public DecentDog(String name) {
+        super(DogTypes.DECENT,name);
     }
+
+    public DecentDog(){}
 
     public void lunch() {
         System.out.println("i eat in RichHohe");
     }
 
-    public DogTypes getType() {
-        return type;
+    public void locationis() {
+        RichHome rh = new RichHome();
+        System.out.println(this.getName() + ": i'm live in");
+        rh.thisLocationIs();
     }
 
 }
