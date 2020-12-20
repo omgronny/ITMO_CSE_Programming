@@ -100,7 +100,7 @@ public class Dunno extends Hero implements Forgettable, Runnable {
     public void walking(DecentDog decentDog) {
         decentDog.walking(this);
         this.journal.add("walking");
-        System.out.println("i'm walking");
+        System.out.println(this.getName() + ": i'm walking");
     }
 
     public void askMoney(Minoga minoga, int x) {
@@ -121,7 +121,7 @@ public class Dunno extends Hero implements Forgettable, Runnable {
             this.setLocation(hospital);
             this.askDoctor(doctor);
         } else {
-            System.out.println("i'm eating alone");
+            System.out.println(this.getName() + ": i'm eating alone");
         }
 
 
@@ -154,7 +154,7 @@ public class Dunno extends Hero implements Forgettable, Runnable {
         if (this.isFriend(human)) {
             NighHome nighHome = new NighHome();
             this.setLocation(nighHome);
-            System.out.println("i'm visiting " + human.getName());
+            System.out.println(this.getName() + ": i'm visiting " + human.getName());
             human.setHappyCount(human.getHappyCount()+1);
         }
 
@@ -199,7 +199,7 @@ public class Dunno extends Hero implements Forgettable, Runnable {
     @Override
     public void run() {
         this.setHappyCount(getHappyCount()+1);
-        System.out.println("i'm running");
+        System.out.println(this.getName() + ": i'm running");
     }
 
 }

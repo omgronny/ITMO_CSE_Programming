@@ -20,6 +20,7 @@ public class Doctor extends Hero {
     }
 
     public void heal(Goat goat) throws AlreadyCuredException {
+
         if (goat.isSick()) {
             throw new AlreadyCuredException();
         }

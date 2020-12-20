@@ -59,6 +59,7 @@ public  class DecentDog extends Dogs implements Dinnable, Locatable, Runnable, J
     }
 
     public void exersize(Dunno dunno) {
+        System.out.println(this.getName() + ": i'm exercising with " + dunno.getName());
         Garden garden = new Garden();
         this.health++;
         dunno.setHappyCount(dunno.getHappyCount()+1);

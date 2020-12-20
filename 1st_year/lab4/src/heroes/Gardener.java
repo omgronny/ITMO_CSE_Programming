@@ -15,6 +15,7 @@ public class Gardener extends Hero{
     }
 
     public void monitor(Garden.Bush bush, Garden.FlowerBed flowerBed) {
+
         bush.setBeautiful(bush.getBeautiful()+1);
         flowerBed.setBeautiful(flowerBed.getBeautiful()+1);
 

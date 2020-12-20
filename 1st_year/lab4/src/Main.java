@@ -7,10 +7,6 @@ import heroes.*;
 import locations.Garden;
 import locations.Locatable;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -34,7 +30,7 @@ public class Main {
         Mimishka mimishka = new Mimishka("Mimishka", 0){
             @Override
             public void wagTheTail() {
-                System.out.println("i so sad((");
+                System.out.println(this.getName() + ":  so sad((");
             }
         };
 
@@ -47,11 +43,18 @@ public class Main {
         }
 
         System.out.println("---------");
+        System.out.println(roland.getName() + ": My health is " + roland.getHealth());
         dunno.lunch();
+        roland.exersize(dunno);
+        System.out.println(roland.getName() + ": My health is " + roland.getHealth());
         System.out.println("---------");
         dunno.askMoney(minoga, 10);
         System.out.println("---------");
-        minoga.eveningParty(dunno, roland, mimishka);
+        try {
+            minoga.eveningParty(dunno, roland, mimishka);
+        } catch (DogNotFoundException e) {
+            e.getMessage();
+        }
         System.out.println("---------");
         try {
             minoga.dinner(mimishka, dunno, roland);

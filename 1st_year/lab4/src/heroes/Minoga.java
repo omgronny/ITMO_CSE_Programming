@@ -8,7 +8,6 @@ import locations.Concert;
 import locations.RichHome;
 import locations.Theater;
 
-import java.text.CompactNumberFormat;
 
 public class Minoga extends Hero implements Dinnerable {
 
@@ -19,11 +18,21 @@ public class Minoga extends Hero implements Dinnerable {
 
     public void setMoney(int money) { this.money = money; }
 
+    public int getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(int authority) {
+        this.authority = authority;
+    }
+
     public Minoga(String name, int age, int money) {
         super(name, age);
         this.money = money;
         this.authority = 10;
     }
+
+    public Minoga() { }
 
     @Override
     public boolean isFriend(Hero human) { return false; }
@@ -39,7 +48,7 @@ public class Minoga extends Hero implements Dinnerable {
 
     }
 
-    public void eveningParty(Dunno dunno, Roland roland, Mimishka mimishka) {
+    public void eveningParty(Dunno dunno, Roland roland, Mimishka mimishka) throws DogNotFoundException{
         System.out.println(this.getName() + ": i have a Evening party");
         System.out.println(dunno.getName() + ": look! This is our dogs");
         try {
@@ -69,8 +78,33 @@ public class Minoga extends Hero implements Dinnerable {
     }
 
     public void goToConcert(Mimishka mimishka, Dunno dunno, Roland roland) {
+
         Concert concert = new Concert();
         this.setLocation(concert);
+
+        class Musician extends Hero {
+
+            int voice;
+            int popularity;
+
+            Musician(String name, int age, int voice, int popularity) {
+                super(name, age);
+                this.voice = voice;
+                this.popularity = popularity;
+            }
+
+            @Override
+            public boolean isFriend(Hero human) {
+                Minoga minoga = new Minoga();
+                return human.getClass().equals(minoga.getClass());
+            }
+
+            public void sing(Minoga minoga) {
+                minoga.setHappyCount(minoga.getHappyCount()+1);
+            }
+
+        }
+
         try {
             dunno.goToSwimmingPool(roland);
         } catch (DogNotFoundException e) {
@@ -84,6 +118,10 @@ public class Minoga extends Hero implements Dinnerable {
             this.authority++;
             System.out.println(this.getName() + ": i'm going to the concert with " + mimishka.getName());
         }
+
+        Musician musician = new Musician("The best musician", 20, 10, 100);
+        musician.sing(this);
+
     }
 
     public void dinner(Mimishka mimishka, Dunno dunno, Roland roland) throws DogNotFoundException {
