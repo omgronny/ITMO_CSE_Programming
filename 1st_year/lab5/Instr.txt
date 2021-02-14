@@ -1,0 +1,24 @@
+name,x,y,count,form,semester,adminName,adminHeight,adminColor,adminCountry,x,y,z,name
+
+add name,x,y,count
+InviteToWriteAFormEnum
+form
+InviteToWriteASemesterEnum
+semester
+InviteToWriteAnAdmin
+name,height
+InviteToWriteAColorEnum
+color
+InviteToWriteACountryEnum
+country
+InviteToWriteALocationEnum
+x,y,z,name
+
+
+name,x,y,count
+form
+semester
+name,height
+color
+country
+x,y,z,name

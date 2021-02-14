@@ -1,0 +1,14 @@
+show
+help
+lvkvn
+wknkefwn
+info
+add scriptname,2.0,3,25
+FULL_TIME_EDUCATION
+SECOND
+adminName,195
+YELLOW
+ITALY
+5.5,8,30,name
+show
+exit
