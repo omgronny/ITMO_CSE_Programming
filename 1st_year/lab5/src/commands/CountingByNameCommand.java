@@ -6,7 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class CountingByNameCommand {
+/**
+ * Class which realization counting by name command
+ */
+
+public class CountingByNameCommand extends Command {
+
+    /**
+     * method which realization counting by name command
+     * @param vector Vector which contains the objects of StudyGroup
+     */
 
     public static void counting(Vector<StudyGroup> vector) {
 

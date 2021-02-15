@@ -1,5 +1,9 @@
 package collection;
 
+import collection.*;
+import commands.*;
+import parse.*;
+
 public class Person {
 
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -7,6 +11,15 @@ public class Person {
     private Color eyeColor; //Поле может быть null
     private Country nationality; //Поле не может быть null
     private Location location; //Поле может быть null
+
+    /**
+     * Constructor for initialization a Person
+     * @param name Name of Person
+     * @param height height of Person
+     * @param eyeColor enum. Eye's Color of Person
+     * @param nationality nationality of Person
+     * @param location location of Person
+     */
 
     public Person(String name, long height, Color eyeColor, Country nationality, Location location) {
         this.name = name;
@@ -16,7 +29,16 @@ public class Person {
         this.location = location;
     }
 
-    public Person() {}
+    /**
+     * The empty constructor
+     */
+
+    public Person() { }
+
+    /**
+     * method that get the Name of Person
+     * @return Name of Person
+     */
 
     public String getName() {
         return name;
@@ -26,6 +48,11 @@ public class Person {
         this.name = name;
     }
 
+    /**
+     * method that get the height of Person
+     * @return height of Person
+     */
+
     public long getHeight() {
         return height;
     }
@@ -33,6 +60,11 @@ public class Person {
     public void setHeight(long height) {
         this.height = height;
     }
+
+    /**
+     * method that get the eye color of Person
+     * @return eye color of Person
+     */
 
     public Color getEyeColor() {
         return eyeColor;
@@ -42,6 +74,11 @@ public class Person {
         this.eyeColor = eyeColor;
     }
 
+    /**
+     * method that get the nationality of Person
+     * @return  nationality of Person
+     */
+
     public Country getNationality() {
         return nationality;
     }
@@ -49,6 +86,11 @@ public class Person {
     public void setNationality(Country nationality) {
         this.nationality = nationality;
     }
+
+    /**
+     * method that get the Location of Person
+     * @return Location of Person
+     */
 
     public Location getLocation() {
         return location;

@@ -2,9 +2,23 @@ package commands;
 
 import collection.StudyGroup;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Date;
 import java.util.Vector;
 
-public class InfoHelpShowCommand {
+/**
+ * Class that realization a technical-inf-commands
+ */
+
+public class TechnicalInformationCommand extends Command {
+
+    /**
+     * method for print the available commands
+     */
     public static void help() {
         System.out.println("help : вывести справку по доступным командам\n" +
                 "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)\n" +
@@ -24,18 +38,41 @@ public class InfoHelpShowCommand {
                 "print_field_descending_students_count : вывести значения поля studentsCount всех элементов в порядке убывания");
     }
 
+    /**
+     * method for print the information about main collection
+     * @param vector main collection
+     * @param filename file with saved collection
+     */
 
-    public static void info(Vector<StudyGroup> vector) {
 
-        System.out.println("Информация о коллекции: \n Коллекция типа Vector, хранит объекты " +
-                vector.get(0).getClass().toString() + " \n Количество элементов в коллекции: " + vector.size() + " \n " +
-                "В коллекции лежат элементы с именами: ");
+    public static void info(Vector<StudyGroup> vector, String filename) {
+
+        Path path = Paths.get(filename);
+        BasicFileAttributes basicFileAttributes;
+
+        try {
+
+            basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+            Date date = new Date(basicFileAttributes.creationTime().toMillis());
+
+            System.out.println("Информация о коллекции: \n Инициализация: " + date + " \n Коллекция типа Vector, хранит объекты " +
+                    vector.get(0).getClass().toString() + " \n Количество элементов в коллекции: " + vector.size() + " \n " +
+                    "В коллекции лежат элементы с именами: ");
+
+        } catch (IOException e) {
+            System.out.println("Что-то пошло не так при получении даты инициализации");
+        }
 
         for (StudyGroup s : vector) {
             System.out.println(s.getName());
         }
 
     }
+
+    /**
+     * method for print the elements of main collection
+     * @param vector main collection
+     */
 
     public static void show(Vector<StudyGroup> vector) {
         for (StudyGroup s : vector) {

@@ -1,8 +1,8 @@
 package collection;
 
+import collection.*;
 import commands.*;
-import parse.Parce;
-import parse.ParceCSV;
+import parse.*;
 
 import java.awt.Color;
 import java.io.File;
@@ -16,11 +16,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
+/**
+ * class that implements work with the console and script files
+ */
+
 public class Collection {
 
-    Vector<StudyGroup> vector = new Vector<>();
-    String filename = System.getenv("INPUT_PATH");
-    File file = new File(filename);
+    //Vector<StudyGroup> vector = new Vector<>();
+    private String filename = System.getenv("INPUT_PATH");
+    private File file = new File(filename);
+
+    /**
+     * The main method for parse the lines from console or script
+     * @param vector your Vector that stores a StudyGroup Objects
+     * @param scriptFile file for run the script
+     * @param in Scanner that read the lines from console
+     * @return your Vector
+     */
 
     public Vector<StudyGroup> consoleInput(Vector<StudyGroup> vector, File scriptFile, Scanner in) {
 
@@ -30,9 +42,10 @@ public class Collection {
         }
 
         if (filename == null) {
-            System.out.println("Файл не найдена");
+            System.out.println("Файл не найден");
             System.exit(0);
         }
+
         Path path = Paths.get(filename);
         if (!(Files.isReadable(path) && Files.isExecutable(path) && Files.isWritable(path))) {
             System.out.println("Ошибка прав");
@@ -74,27 +87,29 @@ public class Collection {
                     System.out.println("Некорректный ввод, у команды add должны быть аргументы" +
                             " имя, координтаты Х,У и количество студентов. попробуйте еще раз");
                 }
+
+
                 isNotACommand = false;
 
             }
 
             if (strArray.get(0).equals("help")) {
 
-                InfoHelpShowCommand.help();
+                TechnicalInformationCommand.help();
                 isNotACommand = false;
 
             }
 
             if (strArray.get(0).equals("info")) {
 
-                InfoHelpShowCommand.info(vector);
+                TechnicalInformationCommand.info(vector, filename);
                 isNotACommand = false;
 
             }
 
             if (strArray.get(0).equals("show")) {
 
-                InfoHelpShowCommand.show(vector);
+                TechnicalInformationCommand.show(vector);
                 isNotACommand = false;
 
             }
@@ -146,7 +161,7 @@ public class Collection {
 
             if (strArray.get(0).equals("clear")) {
 
-                vector = Clear.clear(vector);
+                vector = ClearCommand.clear(vector);
                 isNotACommand = false;
 
             }
@@ -197,10 +212,10 @@ public class Collection {
             if (strArray.get(0).equals("exit")) {
 
                 if (scriptFile == null) {
-                    System.out.println("Вы уверены, что хотите завершить программу без сохранения? Все данные будут утеряны. " +
+                    System.out.println("Вы уверены, что хотите завершить программу? Все не сохраненные данные будут утеряны. " +
                             "(Если вы хотите выйти, напишите 'Да')");
 
-                    if (in.nextLine().equals("Да")) {
+                    if (in.nextLine().toLowerCase().equals("да")) {
                         break;
                     } else {
                         System.out.println("Пожалуйста, введите команды. (При добавлении элемента перечисляйте поля " +
@@ -311,6 +326,13 @@ public class Collection {
         return vector;
 
     }
+
+    /**
+     * method for separated the string
+     * @param str String that you want to split
+     * @param count Number of separations
+     * @return split ArrayList
+     */
 
     public static ArrayList<String> tabSpliter(String str, int count) {
 

@@ -8,8 +8,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class SortedFilterCommand {
+/**
+ * Class that realization a sorted and filtered commands
+ */
 
+public class SortedFilterCommand extends Command {
+
+    /**
+     * method that print the sorted collection
+     * @param vector main collection
+     * @param isScript variable that check program to script
+     * @return main collection
+     */
 
     public static Vector<StudyGroup> reorder(Vector<StudyGroup> vector, boolean isScript) {
 
@@ -28,6 +38,11 @@ public class SortedFilterCommand {
         return vector1;
     }
 
+    /**
+     * method that print the sorted collection by count of students
+     * @param vector main collection
+     */
+
     public static void printStudentsCount(Vector<StudyGroup> vector) {
 
         List<StudyGroup> helpList = new Vector<>();
@@ -43,6 +58,13 @@ public class SortedFilterCommand {
         }
 
     }
+
+    /**
+     * method that print the filtered collection by type of education
+     * @param vector main collection
+     * @param typeOfEducation type of education (enum)
+     * @return main collection
+     */
 
     public static Vector<StudyGroup> filterByEducation(Vector<StudyGroup> vector, String typeOfEducation) {
 

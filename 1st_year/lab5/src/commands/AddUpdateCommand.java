@@ -6,10 +6,24 @@ import parse.Parce;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class AddUpdateCommand {
+/**
+ * class that realization the add,update,insert at and add if max commands
+ */
+
+public class AddUpdateCommand extends Command {
+
+    /**
+     * class that realization the add,update,insert at and add if max commands
+     * @param line ArrayList with first parameters of element (name,coordinates and count of students)
+     * @param in Scanner for input reading
+     * @param vector main collection
+     * @param isAdd int variable that specifies a command
+     * @return main collection
+     */
 
     public static Vector<StudyGroup> addUpdateCommand(ArrayList<String> line, Scanner in, Vector<StudyGroup> vector,
                                                int isAdd) {
@@ -35,12 +49,14 @@ public class AddUpdateCommand {
             line.set(0, idName.get(1));
 
             int inputId;
+
             try {
                 inputId = Integer.parseInt(idName.get(0));
             } catch (NumberFormatException e) {
                 System.out.println("Некорректное значение id");
                 return vector;
             }
+
 
             boolean isId = false;
             for (int i = 0; i < vector.size(); i++) {
@@ -138,113 +154,145 @@ public class AddUpdateCommand {
             return vector;
         }
 
-        if (isAdd < 5) {
+        while (true) {
 
-            System.out.println("Пожалйста, введите formOfEducation. Возможные варианты: DISTANCE_EDUCATION," +
-                    " FULL_TIME_EDUCATION, EVENING_CLASSES");
+            if (isAdd < 5) {
+
+                System.out.println("Пожалйста, введите formOfEducation. Возможные варианты: DISTANCE_EDUCATION," +
+                        " FULL_TIME_EDUCATION, EVENING_CLASSES");
+            }
+
+            //line.get(x) больше не валиден
+
+            try {
+                studyGroup.setFormOfEducation(FormOfEducation.valueOf(in.nextLine()));
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка ввода. Некоррктное значение поля formOfEducation в строке ");
+                //return vector;
+            }
+
         }
 
-        //line.get(x) больше не валиден
 
-        try {
-            studyGroup.setFormOfEducation(FormOfEducation.valueOf(in.nextLine()));
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка ввода. Некоррктное значение поля formOfEducation в строке ");
-            return vector;
-        }
+        while (true) {
 
+            if (isAdd < 5) {
 
-        if (isAdd < 5) {
+                System.out.println("Пожалйста, введите Semester. Возможные варианты: SECOND," + " FOURTH," + " SIXTH," +
+                        " SEVENTH," + " EIGHTH");
+            }
 
-            System.out.println("Пожалйста, введите Semester. Возможные варианты: SECOND," + " FOURTH," + " SIXTH," +
-                    " SEVENTH," + " EIGHTH");
-        }
+            try {
+                studyGroup.setSemesterEnum(Semester.valueOf(in.nextLine()));
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка ввода. Некоррктное значение поля Semester в строке ");
+                //return vector;
+            }
 
-        try {
-            studyGroup.setSemesterEnum(Semester.valueOf(in.nextLine()));
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка ввода. Некоррктное значение поля Semester в строке ");
-            return vector;
-        }
-
-        if (isAdd < 5) {
-
-            System.out.println("Пожалйста, введите имя и рост админа (имя не может быть пустым, " +
-                    "рост должен быть больше нуля");
         }
 
         Person person = new Person();
         Parce parce = new Parce();
 
-        ArrayList<String> nameHeightArray = parce.arrayParce(in.nextLine());
+        while (true) {
 
-        if (nameHeightArray.get(0).length() != 0) {
-            person.setName(nameHeightArray.get(0));
-        } else {
-            System.out.println("Ошибка ввода. Имя не может быть пустым");
-            return vector;
-        }
+            if (isAdd < 5) {
 
-
-        try {
-            person.setHeight(Long.parseLong(nameHeightArray.get(1)));
-            if (Long.parseLong(nameHeightArray.get(1)) <= 0) {
-                throw new ValueException();
+                System.out.println("Пожалйста, введите имя и рост админа (имя не может быть пустым, " +
+                        "рост должен быть больше нуля");
             }
-        } catch (NumberFormatException | ValueException e) {
-            System.out.println("Ошибка ввода в. Проверьте, что передаваемое поле height в строке " +
-                    " больше нуля и его " + "ввод не пропущен");
-            return vector;
-        }
 
-        if (isAdd < 5) {
+            ArrayList<String> nameHeightArray = parce.arrayParce(in.nextLine());
 
-            System.out.println("Пожалйста, введите цвет глаз админа. Возможные варианты: YELLOW, ORANGE, WHITE, BROWN");
-        }
-
-        try {
-            person.setEyeColor(Color.valueOf(in.nextLine()));
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка ввода. Некоррктное значение поля Color в строке ");
-            return vector;
-        }
-        if (isAdd < 5) {
-
-            System.out.println("Пожалйста, введите национальность админа. Возможные варианты: USA," + " FRANCE," +
-                    " ITALY," + " SOUTH_KOREA");
-        }
-
-        try {
-            person.setNationality(Country.valueOf(in.nextLine()));
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка ввода. Некоррктное значение поля Country в строке ");
-            return vector;
-        }
-
-        if (isAdd < 5) {
-
-            System.out.println("Пожалйста, введите локацию админа. Число Х - дробное,  У и Z - целочисленные, и непустое " +
-                    "поле name");
-        }
-
-        ArrayList<String> locationArray = parce.arrayParce(in.nextLine());
-
-        try {
-            Location location = new Location(Double.parseDouble(locationArray.get(0)),
-                    Integer.parseInt(locationArray.get(1)), Integer.parseInt(locationArray.get(2)),
-                    locationArray.get(3));
-            if (locationArray.get(3).length() == 0) {
-                throw new IllegalArgumentException();
+            if (nameHeightArray.get(0).length() != 0) {
+                person.setName(nameHeightArray.get(0));
+            } else {
+                System.out.println("Ошибка ввода. Имя не может быть пустым");
+                //return vector;
+                continue;
             }
-            person.setLocation(location);
-        } catch (NumberFormatException e) {
-            System.out.println("Ошибка ввода. Проверьте, что передаваемые поля локации в строке " +
-                    " удовлетворяют требованиям (число Х - дробное, а У и Z - целочисленные)" +
-                    " и их " + "ввод не пропущен");
-            return vector;
-        } catch (IllegalArgumentException ee) {
-            System.out.println("Ошибка ввода. Имя не может быть пустым");
-            return vector;
+
+
+            try {
+                person.setHeight(Long.parseLong(nameHeightArray.get(1)));
+                if (Long.parseLong(nameHeightArray.get(1)) <= 0) {
+                    throw new ValueException();
+                }
+                break;
+            } catch (NumberFormatException | ValueException e) {
+                System.out.println("Ошибка ввода. Проверьте, что передаваемое поле height в строке " +
+                        " больше нуля и его " + "ввод не пропущен");
+                //return vector;
+                continue;
+            }
+
+        }
+
+        while (true) {
+
+            if (isAdd < 5) {
+
+                System.out.println("Пожалйста, введите цвет глаз админа. Возможные варианты: YELLOW, ORANGE, WHITE, BROWN");
+            }
+
+            try {
+                person.setEyeColor(Color.valueOf(in.nextLine()));
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка ввода. Некоррктное значение поля Color в строке ");
+                //return vector;
+            }
+        }
+
+        while (true) {
+
+            if (isAdd < 5) {
+
+                System.out.println("Пожалйста, введите национальность админа. Возможные варианты: USA," + " FRANCE," +
+                        " ITALY," + " SOUTH_KOREA");
+            }
+
+            try {
+                person.setNationality(Country.valueOf(in.nextLine()));
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка ввода. Некоррктное значение поля Country в строке ");
+                //return vector;
+            }
+
+        }
+
+        while (true) {
+
+            if (isAdd < 5) {
+
+                System.out.println("Пожалйста, введите локацию админа. Число Х - дробное,  У и Z - целочисленные, и непустое " +
+                        "поле name");
+            }
+
+            ArrayList<String> locationArray = parce.arrayParce(in.nextLine());
+
+            try {
+                Location location = new Location(Double.parseDouble(locationArray.get(0)),
+                        Integer.parseInt(locationArray.get(1)), Integer.parseInt(locationArray.get(2)),
+                        locationArray.get(3));
+                if (locationArray.get(3).length() == 0) {
+                    throw new IllegalArgumentException();
+                }
+                person.setLocation(location);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка ввода. Проверьте, что передаваемые поля локации в строке " +
+                        " удовлетворяют требованиям (число Х - дробное, а У и Z - целочисленные)" +
+                        " и их " + "ввод не пропущен");
+                //return vector;
+            } catch (IllegalArgumentException ee) {
+                System.out.println("Ошибка ввода. Имя не может быть пустым");
+                //return vector;
+            }
+
         }
 
         studyGroup.setGroupAdmin(person);
@@ -285,6 +333,8 @@ public class AddUpdateCommand {
             }
 
         }
+
+        Collections.sort(vector);
 
 
         return vector;

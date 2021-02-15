@@ -11,4 +11,4 @@ YELLOW
 ITALY
 5.5,8,30,name
 show
-exit
+execute_script script2.txt

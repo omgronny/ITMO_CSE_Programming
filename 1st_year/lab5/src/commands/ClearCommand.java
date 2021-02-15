@@ -4,7 +4,17 @@ import collection.StudyGroup;
 
 import java.util.Vector;
 
-public class Clear {
+/**
+ * Class that realization Clear-Command
+ */
+
+public class ClearCommand extends Command {
+
+    /**
+     * method that realization Clear-Command
+     * @param vector Vector which contains the objects of StudyGroup
+     * @return Vector which contains the objects of StudyGroup
+     */
 
     public static Vector<StudyGroup> clear(Vector<StudyGroup> vector) {
 

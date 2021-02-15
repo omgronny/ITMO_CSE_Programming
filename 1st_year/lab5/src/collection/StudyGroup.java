@@ -7,7 +7,12 @@ import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * The StudyGroup class - that exact class that is meant to fill the collection with its objects
+ */
+
 public class StudyGroup implements Comparable<StudyGroup> {
+
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
                     // Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -19,13 +24,24 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private Semester semesterEnum; //Поле может быть null
     private Person groupAdmin; //Поле не может быть null
 
-
-
-    public int getId() {
-        return id;
-    }
+    /**
+     * The empty constructor
+     */
 
     public StudyGroup() { }
+
+    /**
+     * full initialization constructor
+     * @param id int id of study group
+     * @param name String name of study group
+     * @param coordinates coordinates of study group
+     * @param creationDate creation date of this study group object
+     * @param studentsCount int count of students of study group
+     * @param formOfEducation  form Of Education - enum
+     * @param semesterEnum semester - Enum
+     * @param groupAdmin admin of this study group object
+     */
+
 
     public StudyGroup(int id, String name, Coordinates coordinates, LocalDateTime creationDate, Long studentsCount,
                       FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
@@ -40,12 +56,25 @@ public class StudyGroup implements Comparable<StudyGroup> {
 
     }
 
+    /**
+     * constructor w/o formOfEducation, semesterEnum and groupAdmin
+     * @param id int id of study group
+     * @param name String name of study group
+     * @param coordinates coordinates of study group
+     * @param creationDate  creation date of this study group object
+     * @param studentsCount int count of students of study group
+     */
+
     public StudyGroup(int id, String name, Coordinates coordinates, LocalDateTime creationDate, Long studentsCount) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
         this.studentsCount = studentsCount;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -107,6 +136,12 @@ public class StudyGroup implements Comparable<StudyGroup> {
     public void setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
     }
+
+    /**
+     * Overrided method for compare the objects
+     * @param o  comparable parameter
+     * @return int result
+     */
 
     @Override
     public int compareTo(StudyGroup o) {

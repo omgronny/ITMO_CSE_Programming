@@ -12,9 +12,20 @@ import java.util.Scanner;
 import java.util.Vector;
 import collection.*;
 import collection.Color;
-import exceptions.ValueException;
+import exceptions.*;
 
-public class ParceCSV {
+/**
+ * Class that realization parsing from CSV-format or parsing to CSV-format
+ */
+
+
+public class ParceCSV extends Parce {
+
+    /**
+     * method for parsing file to ArrayList of Strings. Separation by lines
+     * @param file file foe parsing
+     * @return ArrayList of file-lines
+     */
 
     public ArrayList<String> fileToArray(File file) {
 
@@ -37,23 +48,12 @@ public class ParceCSV {
         return lines;
     }
 
-    public ArrayList<String> lineToArray(File file) {
-
-        //File file = new File("Data.csv");
-        ArrayList<String> lines = new ArrayList<String>();
-
-        try {
-
-            Scanner sc = new Scanner(file);
-
-            String line = sc.nextLine();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return lines;
-    }
+    /**
+     * method that parsing the csv-file to main collection
+     * @param file csv-file
+     * @param vector collection for parsing
+     * @return main collection
+     */
 
     public Vector<StudyGroup> addCSVToVector(File file, Vector vector) {
 
@@ -218,6 +218,12 @@ public class ParceCSV {
 
     }
 
+    /**
+     * method that parsing ArrayList to CSV-format-string
+     * @param arrayList ArrayList of strings
+     * @return CSV-format-string
+     */
+
     public static String parceArrayToCSVFormat (ArrayList<String> arrayList) {
 
         String finalString = "";
@@ -237,6 +243,12 @@ public class ParceCSV {
         return finalString;
 
     }
+
+    /**
+     * method that writing from Array list of strings to CSV-file
+     * @param file csv-format-file
+     * @param list ArrayList of Strings for write to file
+     */
 
     public static void writerToCSV (File file, ArrayList<String> list) {
 

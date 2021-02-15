@@ -12,7 +12,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class SaveCommand {
+/**
+ * class that realization the save command
+ */
+
+public class SaveCommand extends Command {
+
+    /**
+     * method that realization the save command
+     * @param vector main collection
+     * @param file file that contains elements of collection
+     */
 
     public static void saveFile(Vector<StudyGroup> vector, File file) {
 
