@@ -2,6 +2,7 @@ package collection;
 
 import collection.FormOfEducation;
 import collection.Person;
+import parse.Parce;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -148,6 +149,16 @@ public class StudyGroup implements Comparable<StudyGroup> {
         return (int) (this.getStudentsCount() - o.getStudentsCount());
     }
 
+    @Override
+    public String toString() {
+        return (id + " " + Parce.nonSharpString(name) + " " + coordinates.getX() + " " + coordinates.getY() + " "
+                + creationDate.toString() + " " + studentsCount + " " + formOfEducation + " "
+                + semesterEnum + " " + Parce.nonSharpString(groupAdmin.getName()) + groupAdmin.getEyeColor() + " "
+                + groupAdmin.getHeight() + " " + groupAdmin.getEyeColor() + " " + groupAdmin.getNationality() + " "
+                + groupAdmin.getLocation().getX() + " " + groupAdmin.getLocation().getY() + " "
+                + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName()));
+    }
+
     public ArrayList<String> getObject() {
 
         ArrayList<String> stringArrayList = new ArrayList<>();
@@ -162,7 +173,9 @@ public class StudyGroup implements Comparable<StudyGroup> {
                 Field[] coordinatesFields = this.getCoordinates().getClass().getDeclaredFields();
 
                 for (Field cf : coordinatesFields) {
+
                     cf.setAccessible(true);
+
                     try {
                         stringArrayList.add(cf.get(this.getCoordinates()).toString());
                     } catch (IllegalAccessException e) {

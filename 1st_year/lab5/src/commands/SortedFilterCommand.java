@@ -1,9 +1,13 @@
 package commands;
 
-import collection.Collection;
+import collection.Commander;
 import collection.FormOfEducation;
 import collection.StudyGroup;
+import parse.Parce;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -33,6 +37,23 @@ public class SortedFilterCommand extends Command {
             System.out.println("Коллекция отсортирована.");
         } else {
             System.out.println("Коллекция отсортирована. Введите следующую команду");
+        }
+
+
+
+        try {
+
+            File bufferFile = new File("Instr.txt");
+
+            bufferFile.createNewFile();
+
+            SaveCommand.saveFile(vector, "Instr.txt");
+
+        } catch (FileNotFoundException e) {
+            // если файла нет - нужно создать
+
+        } catch (IOException e) {
+
         }
 
         return vector1;
@@ -77,7 +98,7 @@ public class SortedFilterCommand extends Command {
 
         for (StudyGroup s : vector) {
             if (s.getFormOfEducation().toString().equals(typeOfEducation)) {
-                System.out.println(s.getName() + s.getId());
+                System.out.println(Parce.nonSharpString(s.getName()) + " " + s.getId());
             }
         }
 

@@ -1,1 +1,28 @@
-show
+add n 3 4 5
+fsdf
+
+sfdsd
+sfs
+FULL_TIME_EDUCATION
+SEVENTH
+
+script
+script 2
+BROWN
+
+sdvds
+sdv
+
+SOUTH_KOREA
+
+4
+4 5 6 n
+
+group_counting_by_name
+dvd
+group_counting_by_name
+print_field_descending_students_count
+execute_script file_name
+remove_by_id id
+
+

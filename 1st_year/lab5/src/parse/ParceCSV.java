@@ -4,9 +4,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
@@ -32,7 +36,21 @@ public class ParceCSV extends Parce {
         //File file = new File("Data.csv");
         ArrayList<String> lines = new ArrayList<String>();
 
+        String filename = file.toString();
+
+        if (filename == null) {
+            System.out.println("Значение заданной переменной окружения не задано или такой переменной не существует." +
+                    " Пожалуйста, задайте значение переменной и запустите программу снова");
+            System.exit(0);
+        }
+
+        Path path = Paths.get(filename);
+
         try {
+
+            if (!(Files.isReadable(path))) {
+                throw new ValueException();
+            }
 
             Scanner sc = new Scanner(file);
 
@@ -41,8 +59,16 @@ public class ParceCSV extends Parce {
                 lines.add(line);
             }
 
+            sc.close();
+
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+            System.out.println("Файл не найден");
+            System.exit(0);
+
+        } catch (ValueException e) {
+            System.out.println("Ошибка прав, нужны права на чтение");
+            System.exit(0);
         }
 
         return lines;
@@ -57,37 +83,28 @@ public class ParceCSV extends Parce {
 
     public Vector<StudyGroup> addCSVToVector(File file, Vector vector) {
 
-        ParceCSV parceCSV = new ParceCSV();
         Parce parce = new Parce();
-        ArrayList<String> lines = parceCSV.fileToArray(file);
+
+        ArrayList<String> lines = fileToArray(file);
         ArrayList<String> line = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {
 
             StudyGroup studyGroup = new StudyGroup();
 
-
             line = parce.arrayParce(lines.get(i));
 
-//            line.get(4);        // 2021-02-14T16:53:19.254626900
-//
-//            int year = Integer.parseInt(String.valueOf((line.get(4).charAt(0)) + (line.get(4).charAt(1)) +
-//                    (line.get(4).charAt(2)) + (line.get(4).charAt(3))));
-//
-//            int month = Integer.parseInt(String.valueOf((line.get(4).charAt(5)) + (line.get(4).charAt(6))));
-//            int day = Integer.parseInt(String.valueOf((line.get(4).charAt(8)) + (line.get(4).charAt(9))));
-//            int hour = Integer.parseInt(String.valueOf((line.get(4).charAt(11)) + (line.get(4).charAt(12))));
-//            int minute = Integer.parseInt(String.valueOf((line.get(4).charAt(14)) + (line.get(4).charAt(15))));
-//            int second = Integer.parseInt(String.valueOf((line.get(4).charAt(17)) + (line.get(4).charAt(18))));
-//
-//
-//
-//            LocalDate localDate = new LocalDate(year, month, day);
-//            LocalTime localTime = new LocalTime(hour, minute, second, 0);
-//            LocalDateTime localDateTime = new LocalDateTime(localDate, localTime);
+            try {
 
-            studyGroup.setCreationDate(LocalDateTime.parse(line.get(4)));
+                studyGroup.setCreationDate(LocalDateTime.parse(line.get(4)));
 
+            } catch (IndexOutOfBoundsException e) {
+                //vector.add(null);
+                continue;
+            } catch (DateTimeParseException e) {
+                System.out.println("Проверьте данные в строке " + i + " Возможно, вы неверно указали время создания " +
+                        "объекта или количество полей не соответствует нужному");
+            }
 
 
 
@@ -98,7 +115,7 @@ public class ParceCSV extends Parce {
             if (line.size() != 16) {
                 System.out.println("Ошибка ввода в файле. Количество полей в строке " + i + " не соответствует нужному. Возможно, " +
                         "Вы использовали специальные символы в именах или забыли ввести какие-то поля.");
-                break;
+                continue;
             }
 
 
@@ -107,7 +124,7 @@ public class ParceCSV extends Parce {
                 studyGroup.setName(line.get(1));
             } else {
                 System.out.println("Ошибка ввода в файле. Имя не может быть пустым. Строка " + i);
-                break;
+                continue;
             }
 
 
@@ -121,7 +138,7 @@ public class ParceCSV extends Parce {
                 System.out.println("Ошибка ввода в файле. Проверьте, что передаваемые координаты в строке " + i +
                         " удовлетворяют требованиям (число Х - дробное и не больше 866, а У - целочисленное) и их " +
                         "ввод не пропущен");
-                break;
+                continue;
             }
 
 
@@ -133,7 +150,7 @@ public class ParceCSV extends Parce {
             } catch (NumberFormatException | ValueException e) {
                 System.out.println("Ошибка ввода в файле. Проверьте, что передаваемое поле studentsCount в строке " + i +
                         " больше нуля и его " + "ввод не пропущен");
-                break;
+                continue;
             }
 
 
@@ -141,7 +158,7 @@ public class ParceCSV extends Parce {
                 studyGroup.setFormOfEducation(FormOfEducation.valueOf(line.get(6)));
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка ввода в файле. Некоррктное значение поля formOfEducation в строке " + i);
-                break;
+                continue;
             }
 
 
@@ -149,7 +166,7 @@ public class ParceCSV extends Parce {
                 studyGroup.setSemesterEnum(Semester.valueOf(line.get(7)));
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка ввода в файле. Некоррктное значение поля Semester в строке " + i);
-                break;
+                continue;
             }
 
             Person person = new Person();
@@ -158,7 +175,7 @@ public class ParceCSV extends Parce {
                 person.setName(line.get(8));
             } else {
                 System.out.println("Ошибка ввода в файле. Имя не может быть пустым. Строка " + i);
-                break;
+                continue;
             }
 
 
@@ -170,7 +187,7 @@ public class ParceCSV extends Parce {
             } catch (NumberFormatException | ValueException e) {
                 System.out.println("Ошибка ввода в файле. Проверьте, что передаваемое поле height в строке " + i +
                         " больше нуля и его " + "ввод не пропущен");
-                break;
+                continue;
             }
 
 
@@ -178,7 +195,7 @@ public class ParceCSV extends Parce {
                 person.setEyeColor(Color.valueOf(line.get(10)));
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка ввода в файле. Некоррктное значение поля Color в строке " + i);
-                break;
+                continue;
             }
 
 
@@ -186,7 +203,7 @@ public class ParceCSV extends Parce {
                 person.setNationality(Country.valueOf(line.get(11)));
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка ввода в файле. Некоррктное значение поля Country в строке " + i);
-                break;
+                continue;
             }
 
 
@@ -201,15 +218,16 @@ public class ParceCSV extends Parce {
                 System.out.println("Ошибка ввода в файле. Проверьте, что передаваемые поля локации в строке " + i +
                         " удовлетворяют требованиям (число Х - дробное, а У и Z - целочисленные)" +
                         " и их " + "ввод не пропущен");
-                break;
+                continue;
             } catch (IllegalArgumentException ee) {
                 System.out.println("Ошибка ввода в файле. Имя не может быть пустым. Строка " + i);
-                break;
+                continue;
             }
 
             studyGroup.setGroupAdmin(person);
 
             vector.add(studyGroup);
+
 
 
         }
@@ -265,8 +283,5 @@ public class ParceCSV extends Parce {
 
 
     }
-
-
-
 
 }

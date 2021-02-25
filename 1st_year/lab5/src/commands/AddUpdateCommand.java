@@ -4,11 +4,11 @@ import collection.*;
 import exceptions.ValueException;
 import parse.Parce;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * class that realization the add,update,insert at and add if max commands
@@ -32,6 +32,7 @@ public class AddUpdateCommand extends Command {
 
         int index = 0;
         long maxStudents = 0;
+        boolean isCorrect = false;
 
         if (isAdd == 1 || isAdd == 5) {
 
@@ -43,8 +44,8 @@ public class AddUpdateCommand extends Command {
 
         } else if (isAdd == 2 || isAdd == 6) {
 
-            Collection collection = new Collection();
-            ArrayList<String> idName = collection.tabSpliter(line.get(0), 1);
+            Commander commander = new Commander();
+            ArrayList<String> idName = commander.tabSpliter(line.get(0), 1);
 
             line.set(0, idName.get(1));
 
@@ -57,8 +58,8 @@ public class AddUpdateCommand extends Command {
                 return vector;
             }
 
-
             boolean isId = false;
+
             for (int i = 0; i < vector.size(); i++) {
                 StudyGroup s = vector.get(i);
                 if (inputId == s.getId()) {
@@ -76,8 +77,8 @@ public class AddUpdateCommand extends Command {
 
         } else if (isAdd == 3) {
 
-            Collection collection = new Collection();
-            ArrayList<String> indName = collection.tabSpliter(line.get(0), 1);
+            Commander commander = new Commander();
+            ArrayList<String> indName = commander.tabSpliter(line.get(0), 1);
 
             Double d = new Double(Math.random() * 10000);
             studyGroup.setId(studyGroup.hashCode() + d.intValue());
@@ -100,8 +101,6 @@ public class AddUpdateCommand extends Command {
             studyGroup.setId(studyGroup.hashCode() + d.intValue());
 
             studyGroup.setCreationDate(LocalDateTime.now());
-
-
 
             for (int i = 0; i < vector.size(); i++) {
                 if (vector.get(i).getStudentsCount() > maxStudents) {
@@ -162,12 +161,26 @@ public class AddUpdateCommand extends Command {
                         " FULL_TIME_EDUCATION, EVENING_CLASSES");
             }
 
+            if (!in.hasNext()) {
+                break;
+            }
+
             //line.get(x) больше не валиден
 
             try {
-                studyGroup.setFormOfEducation(FormOfEducation.valueOf(in.nextLine()));
+
+                String nextLine = in.nextLine();
+
+                if (nextLine.equals("exit")) {
+                    return vector;
+                }
+
+                studyGroup.setFormOfEducation(FormOfEducation.valueOf(nextLine));
+                isCorrect = true;
                 break;
-            } catch (IllegalArgumentException e) {
+
+            } catch (IllegalArgumentException | NoSuchElementException e) {
+                isCorrect = false;
                 System.out.println("Ошибка ввода. Некоррктное значение поля formOfEducation в строке ");
                 //return vector;
             }
@@ -183,11 +196,26 @@ public class AddUpdateCommand extends Command {
                         " SEVENTH," + " EIGHTH");
             }
 
-            try {
-                studyGroup.setSemesterEnum(Semester.valueOf(in.nextLine()));
+            if (!in.hasNext()) {
                 break;
-            } catch (IllegalArgumentException e) {
+            }
+
+            try {
+
+                String nextLine = in.nextLine();
+
+                if (nextLine.equals("exit")) {
+                    return vector;
+                }
+
+                studyGroup.setSemesterEnum(Semester.valueOf(nextLine));
+                isCorrect = true;
+
+                break;
+            } catch (IllegalArgumentException | NoSuchElementException e) {
+
                 System.out.println("Ошибка ввода. Некоррктное значение поля Semester в строке ");
+                isCorrect = false;
                 //return vector;
             }
 
@@ -204,7 +232,17 @@ public class AddUpdateCommand extends Command {
                         "рост должен быть больше нуля");
             }
 
-            ArrayList<String> nameHeightArray = parce.arrayParce(in.nextLine());
+            if (!in.hasNext()) {
+                break;
+            }
+
+            String nextLine = in.nextLine();
+
+            if (nextLine.equals("exit")) {
+                return vector;
+            }
+
+            ArrayList<String> nameHeightArray = parce.arrayParce(nextLine);
 
             if (nameHeightArray.get(0).length() != 0) {
                 person.setName(nameHeightArray.get(0));
@@ -216,14 +254,20 @@ public class AddUpdateCommand extends Command {
 
 
             try {
+
                 person.setHeight(Long.parseLong(nameHeightArray.get(1)));
+
                 if (Long.parseLong(nameHeightArray.get(1)) <= 0) {
                     throw new ValueException();
                 }
+                isCorrect = true;
+
                 break;
-            } catch (NumberFormatException | ValueException e) {
+
+            } catch (NumberFormatException | ValueException | IndexOutOfBoundsException | NoSuchElementException e) {
                 System.out.println("Ошибка ввода. Проверьте, что передаваемое поле height в строке " +
                         " больше нуля и его " + "ввод не пропущен");
+                isCorrect = false;
                 //return vector;
                 continue;
             }
@@ -237,11 +281,24 @@ public class AddUpdateCommand extends Command {
                 System.out.println("Пожалйста, введите цвет глаз админа. Возможные варианты: YELLOW, ORANGE, WHITE, BROWN");
             }
 
-            try {
-                person.setEyeColor(Color.valueOf(in.nextLine()));
+            if (!in.hasNext()) {
                 break;
-            } catch (IllegalArgumentException e) {
+            }
+
+            try {
+
+                String nextLine = in.nextLine();
+
+                if (nextLine.equals("exit")) {
+                    return vector;
+                }
+
+                person.setEyeColor(Color.valueOf(nextLine));
+                isCorrect = true;
+                break;
+            } catch (IllegalArgumentException | NoSuchElementException e) {
                 System.out.println("Ошибка ввода. Некоррктное значение поля Color в строке ");
+                isCorrect = false;
                 //return vector;
             }
         }
@@ -254,11 +311,24 @@ public class AddUpdateCommand extends Command {
                         " ITALY," + " SOUTH_KOREA");
             }
 
-            try {
-                person.setNationality(Country.valueOf(in.nextLine()));
+            if (!in.hasNext()) {
                 break;
-            } catch (IllegalArgumentException e) {
+            }
+
+            try {
+
+                String nextLine = in.nextLine();
+
+                if (nextLine.equals("exit")) {
+                    return vector;
+                }
+
+                person.setNationality(Country.valueOf(nextLine));
+                isCorrect = true;
+                break;
+            } catch (IllegalArgumentException  | NoSuchElementException e) {
                 System.out.println("Ошибка ввода. Некоррктное значение поля Country в строке ");
+                isCorrect = false;
                 //return vector;
             }
 
@@ -272,24 +342,44 @@ public class AddUpdateCommand extends Command {
                         "поле name");
             }
 
-            ArrayList<String> locationArray = parce.arrayParce(in.nextLine());
+            if (!in.hasNext()) {
+                break;
+            }
+
+            String nextLine = in.nextLine();
+
+            if (nextLine.equals("exit")) {
+                return vector;
+            }
+
+            ArrayList<String> locationArray = parce.arrayParce(nextLine);
 
             try {
+
                 Location location = new Location(Double.parseDouble(locationArray.get(0)),
                         Integer.parseInt(locationArray.get(1)), Integer.parseInt(locationArray.get(2)),
                         locationArray.get(3));
+
                 if (locationArray.get(3).length() == 0) {
                     throw new IllegalArgumentException();
                 }
+
                 person.setLocation(location);
+
+                isCorrect = true;
+
                 break;
-            } catch (NumberFormatException e) {
+
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Ошибка ввода. Проверьте, что передаваемые поля локации в строке " +
                         " удовлетворяют требованиям (число Х - дробное, а У и Z - целочисленные)" +
                         " и их " + "ввод не пропущен");
+
+                isCorrect = false;
                 //return vector;
-            } catch (IllegalArgumentException ee) {
+            } catch (IllegalArgumentException | NoSuchElementException ee) {
                 System.out.println("Ошибка ввода. Имя не может быть пустым");
+                isCorrect = false;
                 //return vector;
             }
 
@@ -297,23 +387,34 @@ public class AddUpdateCommand extends Command {
 
         studyGroup.setGroupAdmin(person);
 
+
         if (isAdd == 1 || isAdd == 5) {
 
-            vector.add(studyGroup);
+            if (isCorrect) {
+                vector.add(studyGroup);
+            }
             if (isAdd != 5) {
                 System.out.println("Элемент добавлен. Можете ввести следующую команду");
             }
 
         } else if (isAdd == 2 || isAdd == 6) {
 
-            vector.set(index, studyGroup);
+            if (isCorrect) {
+
+                vector.set(index, studyGroup);
+
+            }
+
             if (isAdd != 6) {
                 System.out.println("Элемент изменен. Можете ввести следующую команду");
             }
 
         } else if (isAdd == 3 || isAdd == 7) {
 
-            vector.add(index, studyGroup);
+            if (isCorrect) {
+                vector.add(index, studyGroup);
+            }
+
             if (isAdd != 7) {
                 System.out.println("Элемент добавлен. Можете ввести следующую команду");
             }
@@ -322,7 +423,10 @@ public class AddUpdateCommand extends Command {
 
             if (maxStudents <= Long.parseLong(line.get(3))) {
 
-                vector.add(index, studyGroup);
+                if (isCorrect) {
+                    vector.add(index, studyGroup);
+                }
+
                 if (isAdd != 8) {
                     System.out.println("Элемент добавлен. Можете ввести следующую команду");
                 }
@@ -335,6 +439,21 @@ public class AddUpdateCommand extends Command {
         }
 
         Collections.sort(vector);
+
+        try {
+
+            File bufferFile = new File("Instr.txt");
+
+            bufferFile.createNewFile();
+
+            SaveCommand.saveFile(vector, "Instr.txt");
+
+        } catch (FileNotFoundException e) {
+            // если файла нет - нужно создать
+
+        } catch (IOException e) {
+
+        }
 
 
         return vector;

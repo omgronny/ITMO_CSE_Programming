@@ -22,16 +22,27 @@ public class Parce {
         ArrayList<String> strArray = new ArrayList<>();
 
         String helpStr = "";
+
         for (int i = 0; i < str.length(); i++) {
 
-            if (String.valueOf(str.charAt(i)).equals(",")) {
+            if (String.valueOf(str.charAt(i)).equals("#")) {
+
+                helpStr += String.valueOf(str.charAt(i));
+                helpStr += String.valueOf(str.charAt(i+1));
+
+                i++;
+
+            } else if (String.valueOf(str.charAt(i)).equals(",") || String.valueOf(str.charAt(i)).equals(" ")) {
+
                 strArray.add(helpStr);
                 helpStr = "";
+
             } else {
                 helpStr += String.valueOf(str.charAt(i));
             }
 
         }
+
         strArray.add(helpStr);
 
 
@@ -56,10 +67,24 @@ public class Parce {
             String line = sc.nextLine();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Файл не найден");
         }
 
         return lines;
+    }
+
+    public static String nonSharpString(String str) {
+
+        String helpString = "";
+
+        for (int i = 0; i < str.length(); i++) {
+            if (!String.valueOf(str.charAt(i)).equals("#")) {
+                helpString += String.valueOf(str.charAt(i));
+            }
+        }
+
+        return helpString;
+
     }
 
 
