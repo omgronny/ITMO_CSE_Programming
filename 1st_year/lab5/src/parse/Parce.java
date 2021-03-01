@@ -17,7 +17,7 @@ public class Parce {
      * @return ArrayList of words
      */
 
-    public ArrayList<String> arrayParce(String str) {
+    public static ArrayList<String> arrayParce(String str) {
 
         ArrayList<String> strArray = new ArrayList<>();
 

@@ -5,6 +5,7 @@ import collection.StudyGroup;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +22,11 @@ public class ExecuteScriptCommand {
 
         Path pat = Paths.get(filename);
 
+        if (!Files.isReadable(pat)) {
+            System.out.println("Ошибка прав при исполнении скрипта. Нужны права на чтение");
+            return vector;
+        }
+
         Scanner scanner;
 
         try {
@@ -29,8 +35,6 @@ public class ExecuteScriptCommand {
 
             scanner.useDelimiter(System.getProperty("line.separator"));
             Commander commander = new Commander();
-
-
 
             vector = commander.consoleInput(vector, file, scanner);
 

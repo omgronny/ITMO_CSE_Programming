@@ -104,11 +104,19 @@ public class ParceCSV extends Parce {
             } catch (DateTimeParseException e) {
                 System.out.println("Проверьте данные в строке " + i + " Возможно, вы неверно указали время создания " +
                         "объекта или количество полей не соответствует нужному");
+                continue;
             }
 
 
 
-            studyGroup.setId(Integer.parseInt(line.get(0)));
+            try {
+
+                studyGroup.setId(Integer.parseInt(line.get(0)));
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка ввода в файле. Строка " + i);
+                continue;
+            }
 
 
             // сразу проверить количество строк в листе, если оно сходу больше, то кинуть сообщение

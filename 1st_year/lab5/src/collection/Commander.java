@@ -20,7 +20,8 @@ import java.util.Vector;
  * class that implements work with the console and script files
  */
 
-public class Commander {
+
+public class Commander implements Invoker {
 
     //Vector<StudyGroup> vector = new Vector<>();
     private String filename = System.getenv("INPUT_PATH");
@@ -80,9 +81,13 @@ public class Commander {
 
                     if (scriptFile == null) {
 
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 1);
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 1);
+
                     } else {
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 5);
+
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 5);
 
                     }
 
@@ -125,10 +130,13 @@ public class Commander {
 
                     if (scriptFile == null) {
 
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 2);
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 2);
+
                     } else {
 
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 6);
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 6);
 
                     }
 
@@ -146,7 +154,8 @@ public class Commander {
                 try {
 
                     int id = Integer.parseInt(strArray.get(1));
-                    vector = RemoveByIdCommand.remove(vector, id);
+                    //vector =
+                    RemoveByIdCommand.remove(vector, id);
 
                 } catch (NumberFormatException e) {
 
@@ -164,7 +173,8 @@ public class Commander {
 
             if (strArray.get(0).equals("clear")) {
 
-                vector = ClearCommand.clear(vector);
+                //vector =
+                ClearCommand.clear(vector);
                 isNotACommand = false;
 
             }
@@ -204,7 +214,15 @@ public class Commander {
 
                 try {
 
-                    vector = ExecuteScriptCommand.executeScript(strArray.get(1), vector);
+                    ArrayList<String> scriptArry = Parce.arrayParce(strArray.get(1));
+
+                    for (String scriptFileName : scriptArry) {
+
+                        //vector =
+                        ExecuteScriptCommand.executeScript(scriptFileName, vector);
+
+                    }
+
 
                 } catch (IndexOutOfBoundsException e) {
 
@@ -265,9 +283,11 @@ public class Commander {
 
                     if (scriptFile == null) {
 
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 3);
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 3);
                     } else {
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 7);
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 7);
 
                     }
 
@@ -287,9 +307,13 @@ public class Commander {
 
                     if (scriptFile == null) {
 
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 4);
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 4);
+
                     } else {
-                        vector = AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 8);
+
+                        //vector =
+                        AddUpdateCommand.addUpdateCommand(arrayList, in, vector, 8);
 
                     }
 
@@ -323,7 +347,8 @@ public class Commander {
 
                     String educationForm = strArray.get(1);
 
-                    vector = SortedFilterCommand.filterByEducation(vector, educationForm);
+                    //vector =
+                    SortedFilterCommand.filterByEducation(vector, educationForm);
 
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Кажется, вы не ввели тип образования. Доступные варианты: DISTANCE_EDUCATION," +

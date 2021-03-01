@@ -34,9 +34,13 @@ public class SortedFilterCommand extends Command {
         }
 
         if (isScript) {
+
             System.out.println("Коллекция отсортирована.");
+
         } else {
+
             System.out.println("Коллекция отсортирована. Введите следующую команду");
+
         }
 
 
