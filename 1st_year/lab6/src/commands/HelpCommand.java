@@ -22,6 +22,11 @@ public class HelpCommand extends Command implements Serializable {
         return help();
     }
 
+    //@Override
+    public String man() {
+        return null;
+    }
+
     /**
      * method for print the available commands
      */

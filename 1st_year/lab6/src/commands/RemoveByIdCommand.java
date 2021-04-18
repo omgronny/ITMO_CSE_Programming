@@ -1,6 +1,7 @@
 package commands;
 
 import collection.Collection;
+import collection.Condition;
 import collection.StudyGroup;
 
 import java.io.File;
@@ -17,12 +18,15 @@ public class RemoveByIdCommand extends Command implements Serializable {
 
 //    private final Vector<StudyGroup> vector;
     private final int id;
+    private final String login;
 
     private boolean isId = true;
+    private boolean isUser;
 //
-    public RemoveByIdCommand(int id) {
+    public RemoveByIdCommand(int id, String login) {
 //        this.vector = vector;
         this.id = id;
+        this.login = login;
     }
 
     @Override
@@ -32,8 +36,10 @@ public class RemoveByIdCommand extends Command implements Serializable {
 
         if (this.isId) {
             return ("Такого id нет");
-        } else {
+        } else if (isUser) {
             return ("Элемент удален. Посмотреть все элементы можно с помощью команды show");
+        } else {
+            return "Элемент с таким id пренадлежит не вам";
         }
 
     }
@@ -48,11 +54,17 @@ public class RemoveByIdCommand extends Command implements Serializable {
     public Vector<StudyGroup> remove(Vector<StudyGroup> vector, int id) {
 
         boolean isId = true;
+
         for (int i = 0; i < vector.size(); i++) {
             if (vector.get(i).getId() == id) {
-                vector.remove(i);
+                this.isUser = vector.get(i).getCreator().equals(this.login);
+
+                //if (this.isUser) { vector.remove(i); }
+                if (this.isUser) { vector.get(i).setCondition(Condition.DELETE); }
+
                 isId = false;
                 break;
+
             }
         }
 

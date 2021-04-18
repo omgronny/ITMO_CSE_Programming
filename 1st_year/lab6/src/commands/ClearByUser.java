@@ -1,6 +1,7 @@
 package commands;
 
 import collection.Collection;
+import collection.Condition;
 import collection.StudyGroup;
 
 import java.io.File;
@@ -13,30 +14,20 @@ import java.util.Vector;
  * Class that realization Clear-Command
  */
 
-public class ClearCommand extends Command implements Serializable {
+public class ClearByUser extends Command implements Serializable {
 
     private String login;
 
-    public ClearCommand(String login) {
+    public ClearByUser(String login) {
         this.login = login;
     }
-
-//    private final Vector<StudyGroup> vector;
-//
-//    public ClearCommand(Vector<StudyGroup> vector) {
-//        this.vector = vector;
-//    }
 
     @Override
     public String execute() {
 
-        if (this.login.equals(Collection.getServerAdmin())) {
-            Collection.setVector(clear(Collection.getVector()));
-        } else {
-            return "У вас недостаточно прав для очистки коллекции";
-        }
+        Collection.setVector(clearByThisUser(Collection.getVector()));
 
-        return "Коллекция очищена"; //clear(this.vector);
+        return "Элементы удалены"; //clear(this.vector);
     }
 
 
@@ -47,11 +38,13 @@ public class ClearCommand extends Command implements Serializable {
      * @return Vector which contains the objects of StudyGroup
      */
 
-    public Vector<StudyGroup> clear(Vector<StudyGroup> vector1) {
+    public Vector<StudyGroup> clearByThisUser(Vector<StudyGroup> vector1) {
 
-        Vector<StudyGroup> vector = new Vector<>();
-
-        vector1 = vector;
+        for (StudyGroup s : vector1) {
+            if (s.getCreator().equals(this.login)) {
+                s.setCondition(Condition.DELETE);
+            }
+        }
 
 //        try {
 //

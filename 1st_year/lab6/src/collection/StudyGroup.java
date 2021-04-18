@@ -1,7 +1,6 @@
 package collection;
 
-import collection.FormOfEducation;
-import collection.Person;
+
 import parse.Parce;
 
 import java.io.Serializable;
@@ -25,6 +24,9 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
     private FormOfEducation formOfEducation; //Поле может быть null
     private Semester semesterEnum; //Поле может быть null
     private Person groupAdmin; //Поле не может быть null
+    private String creator;
+
+    private Condition condition = Condition.STANDARD;
 
     /**
      * The empty constructor
@@ -46,7 +48,7 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
 
 
     public StudyGroup(int id, String name, Coordinates coordinates, LocalDateTime creationDate, Long studentsCount,
-                      FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
+                      FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin, String creator) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -55,6 +57,7 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         this.formOfEducation = formOfEducation;
         this.semesterEnum = semesterEnum;
         this.groupAdmin = groupAdmin;
+        this.creator = creator;
 
     }
 
@@ -139,6 +142,22 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         this.groupAdmin = groupAdmin;
     }
 
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
+
     /**
      * Overrided method for compare the objects
      * @param o  comparable parameter
@@ -159,22 +178,56 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
                     + semesterEnum + " " + Parce.nonSharpString(groupAdmin.getName()) + groupAdmin.getEyeColor() + " "
                     + groupAdmin.getHeight() + " " + groupAdmin.getEyeColor() + " " + groupAdmin.getNationality() + " "
                     + groupAdmin.getLocation().getX() + " " + groupAdmin.getLocation().getY() + " "
-                    + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName()));
+                    + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName())
+                    + " " + creator + " " + condition.toString());
         } else if (formOfEducation != null) {
             return (id + " " + Parce.nonSharpString(name) + " " + coordinates.getX() + " " + coordinates.getY() + " "
                     + creationDate.toString() + " " + studentsCount + " " + formOfEducation + " "
                     + "  " + " " + Parce.nonSharpString(groupAdmin.getName()) + groupAdmin.getEyeColor() + " "
                     + groupAdmin.getHeight() + " " + groupAdmin.getEyeColor() + " " + groupAdmin.getNationality() + " "
                     + groupAdmin.getLocation().getX() + " " + groupAdmin.getLocation().getY() + " "
-                    + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName()));
+                    + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName())
+                    + " " + creator);
         } else {
             return (id + " " + Parce.nonSharpString(name) + " " + coordinates.getX() + " " + coordinates.getY() + " "
                     + creationDate.toString() + " " + studentsCount + " " + "  " + " "
                     + "  " + " " + Parce.nonSharpString(groupAdmin.getName()) + groupAdmin.getEyeColor() + " "
                     + groupAdmin.getHeight() + " " + groupAdmin.getEyeColor() + " " + groupAdmin.getNationality() + " "
                     + groupAdmin.getLocation().getX() + " " + groupAdmin.getLocation().getY() + " "
-                    + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName()));
+                    + groupAdmin.getLocation().getZ() + " " + Parce.nonSharpString(groupAdmin.getLocation().getName())
+                    + " " + creator);
         }
+    }
+
+    public String toDataBaseFormat() {
+        return (id + ", '" + Parce.nonSharpString(name) + "', " + coordinates.getX() + ", " + coordinates.getY() + ", '"
+                + creationDate.toString() + "', " + studentsCount + ", '" + formOfEducation + "', '"
+                + semesterEnum + "', '" + Parce.nonSharpString(groupAdmin.getName()) + "', '"
+                + groupAdmin.getHeight() + "', '" + groupAdmin.getEyeColor() + "', '" + groupAdmin.getNationality() + "', "
+                + groupAdmin.getLocation().getX() + ", " + groupAdmin.getLocation().getY() + ", "
+                + groupAdmin.getLocation().getZ() + ", '" + Parce.nonSharpString(groupAdmin.getLocation().getName())
+                + "', '" + creator + "'");
+    }
+
+    public String toUpdateFormat() {
+        return ("name = '" + Parce.nonSharpString(name)
+                + "', xcord = "
+                + coordinates.getX()
+                + ", ycord = "
+                + coordinates.getY()
+                + ", createdate = '"
+                + creationDate.toString() + "', count = " + studentsCount + ", typeofeducation = '" + formOfEducation
+                + "', semester = '"
+                + semesterEnum + "', adminname = '"
+                + Parce.nonSharpString(groupAdmin.getName()) + "', height = '"
+                + groupAdmin.getHeight() + "', color = '"
+                + groupAdmin.getEyeColor() + "', country = '"
+                + groupAdmin.getNationality() + "', adminxcoord = "
+                + groupAdmin.getLocation().getX() + ", adminycoord = "
+                + groupAdmin.getLocation().getY() + ", adminzcoord = "
+                + groupAdmin.getLocation().getZ() + ", locationname = '"
+                + Parce.nonSharpString(groupAdmin.getLocation().getName()) + "', userlogin = '"
+                + creator + "'");
     }
 
     public ArrayList<String> getObject() throws NullPointerException {

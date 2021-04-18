@@ -1,6 +1,7 @@
 package commands;
 
 import collection.Collection;
+import collection.Condition;
 import collection.StudyGroup;
 
 import java.io.ObjectOutputStream;
@@ -37,7 +38,9 @@ public class ShowCommand extends Command implements Serializable {
                         s.getFormOfEducation().toString() + " " + s.getGroupAdmin().getName() + " " +
                         s.getSemesterEnum().toString() + " " + s.getStudentsCount()); */
                 //System.out.println(s.getObject());
-                outString += (s.toString() + "\n");
+                if (!s.getCondition().equals(Condition.DELETE)) {
+                    outString += (s.toString() + "\n");
+                }
 
             } catch (NullPointerException e) {
                 outString += ("null " + " \n");

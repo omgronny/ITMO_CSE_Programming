@@ -2,6 +2,7 @@ package commands;
 
 import collection.Collection;
 import collection.StudyGroup;
+import databasehelpers.DataBaseWorker;
 import exceptions.ValueException;
 import parse.ParceCSV;
 
@@ -13,6 +14,7 @@ import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -22,23 +24,27 @@ import java.util.Vector;
 
 public class SaveCommand extends Command implements Serializable {
 
-    private final Vector<StudyGroup> vector;
-    private final String filename;
+    private String adminLogin;
 
-    public SaveCommand(Vector<StudyGroup> vector, String filename) {
-        this.vector = vector;
-        this.filename = filename;
+    public SaveCommand(String adminLogin) {
+        this.adminLogin = adminLogin;
     }
 
     @Override
     public String execute() {
-        try {
-             saveFile(Collection.getVector(), System.getenv("INPUT_PATH"));
-        } catch (FileNotFoundException e) {
-            return ("Файл не найден");
-        }
-        return "До скорой встречи!";
 
+        if (this.adminLogin.equals(Collection.getServerAdmin())) {
+            DataBaseWorker dataBaseWorker = new DataBaseWorker();
+            try {
+                dataBaseWorker.saveToDataBase();
+            } catch (SQLException throwables) {
+                System.out.println("При сохранении что-то пошло не так");
+            }
+        } else {
+            return "У вас нет прав для этой команды";
+        }
+
+        return "До скорой встречи!  \n  До скорой встречи!  \n  Моя любовь к тебе навечно";
     }
 
     /**

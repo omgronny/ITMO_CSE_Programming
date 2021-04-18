@@ -19,6 +19,7 @@ public class AddUpdateCommand extends Command implements Serializable {
     private final StudyGroup studyGroup;
     private ArrayList<String> line;
 
+
     private int indexId;
 
 
@@ -51,7 +52,6 @@ public class AddUpdateCommand extends Command implements Serializable {
         int index = 0;
         long maxStudents = 0;
 
-
         if (this.isAdd == 1 || this.isAdd == 5) {
 
             int maxId = 0;
@@ -68,6 +68,8 @@ public class AddUpdateCommand extends Command implements Serializable {
             this.studyGroup.setId(maxId + d.intValue());
 
             this.studyGroup.setCreationDate(LocalDateTime.now());
+
+            this.studyGroup.setCondition(Condition.INSERT);
 
             vector.add(this.studyGroup);
 
@@ -90,8 +92,14 @@ public class AddUpdateCommand extends Command implements Serializable {
                 }
             }
 
+            if (!updateStudy.getCreator().equals(this.studyGroup.getCreator())) {
+                return "Элемент с таким id пренадлежит не вам";
+            }
+
             this.studyGroup.setId(updateStudy.getId());
             this.studyGroup.setCreationDate(updateStudy.getCreationDate());
+
+            this.studyGroup.setCondition(Condition.UPDATE);
 
 
             if (!isId) {
@@ -100,17 +108,17 @@ public class AddUpdateCommand extends Command implements Serializable {
 
             vector.set(index, this.studyGroup);
 
-
             Collection.setVector(vector);
 
 
         } else if (isAdd == 3) {
 
-
             Double d = new Double(Math.random() * 10000);
             this.studyGroup.setId(this.studyGroup.hashCode() + d.intValue());
 
             this.studyGroup.setCreationDate(LocalDateTime.now());
+
+            this.studyGroup.setCondition(Condition.INSERT);
 
             vector.add(this.indexId, this.studyGroup);
 
@@ -124,6 +132,8 @@ public class AddUpdateCommand extends Command implements Serializable {
             this.studyGroup.setId(this.studyGroup.hashCode() + d.intValue());
 
             this.studyGroup.setCreationDate(LocalDateTime.now());
+
+            this.studyGroup.setCondition(Condition.INSERT);
 
             for (int i = 0; i < vector.size(); i++) {
                 if (vector.get(i).getStudentsCount() > maxStudents) {
@@ -159,12 +169,11 @@ public class AddUpdateCommand extends Command implements Serializable {
 
 
     public AddUpdateCommand addUpdateCommand(ArrayList<String> line, Scanner in,
-                                               int isAdd) {
+                                               int isAdd, String login) {
 
         StudyGroup studyGroup = new StudyGroup();
 
         int idIndex = 0;
-
 
         boolean isCorrect = false;
 
@@ -505,6 +514,7 @@ public class AddUpdateCommand extends Command implements Serializable {
         }
 
         studyGroup.setGroupAdmin(person);
+        studyGroup.setCreator(login);
 
         AddUpdateCommand addUpdateCommand = null;
         if (isCorrect) {

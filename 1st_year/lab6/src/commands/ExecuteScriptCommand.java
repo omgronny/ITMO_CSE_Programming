@@ -5,6 +5,9 @@ import collection.StudyGroup;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketAddress;
+import java.nio.channels.Selector;
+import java.nio.channels.SocketChannel;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -15,8 +18,8 @@ import java.util.Vector;
 
 public class ExecuteScriptCommand {
 
-    public static void executeScript(String filename, long scriptPar, int port)
-            throws StackOverflowError {
+    public static void executeScript(String filename, long scriptPar, int port, Selector selector, SocketAddress a,
+                                     SocketChannel s, SocketChannel readSocket) throws StackOverflowError {
 
         scriptPar--;
 
@@ -38,7 +41,7 @@ public class ExecuteScriptCommand {
             scanner.useDelimiter(System.getProperty("line.separator"));
             Commander commander = new Commander();
 
-            commander.consoleInput(file, scanner, scriptPar, port);
+            commander.consoleInput(file, scanner, scriptPar, port, selector, a, s, readSocket);
 
             scanner.close();
 

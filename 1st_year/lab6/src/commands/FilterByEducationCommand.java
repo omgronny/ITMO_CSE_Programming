@@ -6,7 +6,11 @@ import collection.StudyGroup;
 import parse.Parce;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class FilterByEducationCommand extends Command implements Serializable {
 
@@ -40,6 +44,7 @@ public class FilterByEducationCommand extends Command implements Serializable {
         }
 
         String str = "";
+
         for (StudyGroup s : vector) {
 
             try  {

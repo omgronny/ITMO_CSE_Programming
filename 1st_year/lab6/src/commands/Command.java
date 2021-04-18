@@ -16,6 +16,8 @@ public abstract class Command implements Receiver {
 
     public abstract String execute();
 
+    //public abstract String man();
+
     public byte[] toBytes() {
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

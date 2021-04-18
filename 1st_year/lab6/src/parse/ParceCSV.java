@@ -7,11 +7,15 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
 import collection.*;
@@ -26,73 +30,64 @@ import exceptions.*;
 public class ParceCSV extends Parce {
 
     /**
-     * method for parsing file to ArrayList of Strings. Separation by lines
-     * @param file file foe parsing
+     * method for parsing file to ArrayList of Strings. Separation by line
      * @return ArrayList of file-lines
      */
 
-    public ArrayList<String> fileToArray(File file) {
+    public ArrayList<String> fileToArray(ResultSet rs) {
 
         //File file = new File("Data.csv");
         ArrayList<String> lines = new ArrayList<String>();
 
-        String filename = file.toString();
 
-        if (filename == null) {
-            System.out.println("Значение заданной переменной окружения не задано или такой переменной не существует." +
-                    " Пожалуйста, задайте значение переменной и запустите программу снова");
-            System.exit(0);
-        }
 
-        Path path = Paths.get(filename);
-
-        try {
-
-            if (!(Files.isReadable(path)) && file.exists()) {
-                throw new ValueException();
-            }
-
-            Scanner sc = new Scanner(file);
-
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                lines.add(line);
-            }
-
-            sc.close();
-
-        } catch (FileNotFoundException e) {
-
-            System.out.println("Файл не найден");
-            System.exit(0);
-
-        } catch (ValueException e) {
-            System.out.println("Ошибка прав, нужны права на чтение");
-            System.exit(0);
-        }
-
+//        try {
+//            while (rs.next()) {
+//                String line = rs.ge
+//                lines.add(line);
+//            }
+//        } catch (SQLException throwables) { }
+//
         return lines;
+
     }
 
     /**
      * method that parsing the csv-file to main collection
-     * @param file csv-file
      * @param vector collection for parsing
      * @return main collection
      */
 
-    public Vector<StudyGroup> addCSVToVector(File file, Vector vector) {
+    public Vector<StudyGroup> addCollectionToVector(ResultSet rs, Vector vector) throws SQLException {
 
         Parce parce = new Parce();
 
-        ArrayList<String> lines = fileToArray(file);
+        //ArrayList<String> lines = fileToArray(file);
+        //ArrayList<String> lines = ;
         ArrayList<String> line = new ArrayList<>();
 
-        for (int i = 0; i < lines.size(); i++) {
+        for (int i = 0; rs.next(); i++) {
 
             StudyGroup studyGroup = new StudyGroup();
 
-            line = parce.arrayParce(lines.get(i));
+            line.add(String.valueOf((rs.getInt("id"))));
+            line.add((rs.getString("name")));
+            line.add((rs.getString("xcord")));
+            line.add((rs.getString("ycord")));
+            line.add((rs.getString("createdate")));
+            line.add((rs.getString("count")));
+            line.add((rs.getString("typeofeducation")));
+            line.add((rs.getString("semester")));
+            line.add((rs.getString("adminname")));
+            line.add((rs.getString("height")));
+            line.add((rs.getString("color")));
+            line.add((rs.getString("country")));
+            line.add((rs.getString("adminxcoord")));
+            line.add((rs.getString("adminycoord")));
+            line.add((rs.getString("adminzcoord")));
+            line.add((rs.getString("locationname")));
+            line.add((rs.getString("userlogin")));
+            //line = parce.arrayParce(lines.get(i));
 
             try {
 
@@ -120,7 +115,7 @@ public class ParceCSV extends Parce {
 
 
             // сразу проверить количество строк в листе, если оно сходу больше, то кинуть сообщение
-            if (line.size() != 16) {
+            if (line.size() != 17) {
                 System.out.println("Ошибка ввода в файле. Количество полей в строке " + i + " не соответствует нужному. Возможно, " +
                         "Вы использовали специальные символы в именах или забыли ввести какие-то поля.");
                 continue;
@@ -246,8 +241,11 @@ public class ParceCSV extends Parce {
 
             studyGroup.setGroupAdmin(person);
 
+            studyGroup.setCreator(line.get(16));
+
             vector.add(studyGroup);
 
+            line.clear();
 
 
         }
@@ -280,6 +278,17 @@ public class ParceCSV extends Parce {
 
         return finalString;
 
+    }
+
+    public HashMap<String, String> addUsersToVector(ResultSet rs, HashMap<String, String> hashMap) throws SQLException {
+
+        while (rs.next()) {
+
+            hashMap.put(rs.getString("login"), rs.getString("password"));
+
+        }
+
+        return hashMap;
     }
 
     /**
