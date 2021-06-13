@@ -11,9 +11,9 @@ import static collection.Collection.getUsersMap;
 
 public class DataBaseWorker {
 
-    private final String url = "jdbc:postgresql://localhost/postgres";
-    private final String user = "postgres";
-    private final String password = "crosby87";
+    private final String url = "";
+    private final String user = "";
+    private final String password = "";
 
     public String getUrl() {
         return url;
