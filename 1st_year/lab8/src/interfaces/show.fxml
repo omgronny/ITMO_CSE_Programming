@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="pane" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaces.ShowStage">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="800.0" layoutX="2.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/w800.jpg" />
+         </image>
+      </ImageView>
+      <Circle fx:id="circle" fill="#911fff" layoutX="400.0" layoutY="400.0" opacity="0.34" radius="200.0" stroke="BLACK" strokeType="INSIDE" />
+      <Group fx:id="group" layoutX="291.0" layoutY="310.0" />
+   </children>
+</AnchorPane>
